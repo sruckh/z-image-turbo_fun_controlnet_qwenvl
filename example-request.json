@@ -1,0 +1,302 @@
+{
+  "input": {
+    "workflow": {
+      "6": {
+        "inputs": {
+          "text": [
+            "116",
+            0
+          ],
+          "clip": [
+            "18",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "11": {
+        "inputs": {
+          "value": 3,
+          "model": [
+            "16",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "13": {
+        "inputs": {
+          "width": [
+            "113",
+            0
+          ],
+          "height": [
+            "113",
+            1
+          ],
+          "batch_size": 1
+        },
+        "class_type": "EmptySD3LatentImage",
+        "_meta": {
+          "title": "EmptySD3LatentImage"
+        }
+      },
+      "16": {
+        "inputs": {
+          "filename": "z_image_turbo_bf16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "17": {
+        "inputs": {
+          "filename": "ae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "18": {
+        "inputs": {
+          "filename": "qwen_3_4b.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "95": {
+        "inputs": {
+          "value": 1,
+          "model": [
+            "11",
+            0
+          ],
+          "model_patch": [
+            "96",
+            0
+          ],
+          "vae": [
+            "17",
+            0
+          ],
+          "image": [
+            "112",
+            0
+          ]
+        },
+        "class_type": "QwenImageDiffsynthControlnet",
+        "_meta": {
+          "title": "QwenImageDiffsynthControlnet"
+        }
+      },
+      "96": {
+        "inputs": {
+          "filename": "Z-Image-Turbo-Fun-Controlnet-Union.safetensors"
+        },
+        "class_type": "ModelPatchLoader",
+        "_meta": {
+          "title": "ModelPatchLoader"
+        }
+      },
+      "97": {
+        "inputs": {
+          "image": "fbfd9abc84149e2c44249349d92e099f15dae8bf031ce1b65da5d000ddb6c12e.png"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "99": {
+        "inputs": {
+          "text": "enable",
+          "model": [
+            "95",
+            0
+          ],
+          "positive": [
+            "6",
+            0
+          ],
+          "negative": [
+            "111",
+            0
+          ],
+          "latent_image": [
+            "13",
+            0
+          ],
+          "steps": [
+            "103",
+            0
+          ],
+          "end_at_step": [
+            "105",
+            0
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "100": {
+        "inputs": {
+          "samples": [
+            "102",
+            0
+          ],
+          "vae": [
+            "17",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "102": {
+        "inputs": {
+          "text": "disable",
+          "model": [
+            "11",
+            0
+          ],
+          "positive": [
+            "6",
+            0
+          ],
+          "negative": [
+            "111",
+            0
+          ],
+          "latent_image": [
+            "99",
+            0
+          ],
+          "steps": [
+            "103",
+            0
+          ],
+          "start_at_step": [
+            "105",
+            0
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "111": {
+        "inputs": {
+          "conditioning": [
+            "6",
+            0
+          ]
+        },
+        "class_type": "ConditioningZeroOut",
+        "_meta": {
+          "title": "ConditioningZeroOut"
+        }
+      },
+      "112": {
+        "inputs": {
+          "text": "nearest-exact",
+          "image": [
+            "115",
+            0
+          ]
+        },
+        "class_type": "DJZImageScaleToTotalPixels",
+        "_meta": {
+          "title": "DJZImageScaleToTotalPixels"
+        }
+      },
+      "113": {
+        "inputs": {
+          "text": "width: 896, height: 1152\n batch size: 10ce609785e7af062f6365cb210423f17",
+          "image": [
+            "112",
+            0
+          ]
+        },
+        "class_type": "GetImageSize",
+        "_meta": {
+          "title": "GetImageSize"
+        }
+      },
+      "114": {
+        "inputs": {
+          "images": [
+            "112",
+            0
+          ]
+        },
+        "class_type": "PreviewImage",
+        "_meta": {
+          "title": "PreviewImage"
+        }
+      },
+      "115": {
+        "inputs": {
+          "text": "OpenposePreprocessor",
+          "image": [
+            "97",
+            0
+          ]
+        },
+        "class_type": "AIO_Preprocessor",
+        "_meta": {
+          "title": "AIO_Preprocessor"
+        }
+      },
+      "116": {
+        "inputs": {
+          "text": "Qwen3-VL-4B-Instruct",
+          "image": [
+            "118",
+            0
+          ]
+        },
+        "class_type": "AILab_QwenVL",
+        "_meta": {
+          "title": "AILab_QwenVL"
+        }
+      },
+      "118": {
+        "inputs": {
+          "image": "ac67f006a54cb9e28b5a5910084a15b3e0335a18c653e5ae21a08216a3f26535.jpg"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "119": {
+        "inputs": {
+          "filename_prefix": "ComfyUI",
+          "images": [
+            "100",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      }
+    }
+  }
+}
